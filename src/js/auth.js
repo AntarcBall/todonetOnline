@@ -1,4 +1,5 @@
 // src/js/auth.js
+import { firebaseConfig } from './utils/firebase-config.js';
 
 // --- UI Elements ---
 let loginContainer = null;
@@ -38,16 +39,7 @@ function hideLoginUI() {
 // --- Firebase Initialization & Auth Logic ---
 
 function initializeFirebase() {
-    // IMPORTANT: Replace with your web app's Firebase configuration
-    const firebaseConfig = {
-    apiKey: "AIzaSyBLPpdK38nATM5aNQOwZ04UMevuk0Jv-zQ",
-    authDomain: "todonet-ddd51.firebaseapp.com",
-    projectId: "todonet-ddd51",
-    storageBucket: "todonet-ddd51.firebasestorage.app",
-    messagingSenderId: "292508862182",
-    appId: "1:292508862182:web:f955d1cbeb1eba843d1d27",
-    measurementId: "G-29HBL9Z5NP"
-    };
+    // Firebase configuration is now imported from a separate file
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
