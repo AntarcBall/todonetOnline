@@ -1,0 +1,166 @@
+<svg width="100%" height="100%" viewBox="0 0 1600 1300" xmlns="http://www.w3.org/2000/svg">
+            <!-- SVG 스타일 정의 -->
+            <style>
+                .node-rect { stroke-width: 1.5; rx: 8; ry: 8; }
+                .file-node { fill: #e3f2fd; stroke: #64b5f6; }
+                .component-node { fill: #dcedc8; stroke: #81c784; }
+                .store-node { fill: #fff3e0; stroke: #ffb74d; }
+                .service-node { fill: #ede7f6; stroke: #9575cd; }
+                .logic-node { fill: #f3e5f5; stroke: #ba68c8; }
+                .server-node { fill: #ffebee; stroke: #e57373; }
+                .db-node { fill: #fffde7; stroke: #ffd54f; }
+                .user-node { fill: #e0f7fa; stroke: #4dd0e1; }
+
+                .node-text { font-size: 14px; font-weight: 500; text-anchor: middle; dominant-baseline: middle; }
+                .sub-node-text { font-size: 12px; font-weight: 400; text-anchor: middle; dominant-baseline: middle; }
+                .path-text { font-size: 12px; font-weight: 400; fill: #555; }
+
+                .arrow { stroke: #546e7a; stroke-width: 1.5; fill: none; }
+                .arrow-dashed { stroke-dasharray: 6, 4; }
+                .arrow-bold { stroke-width: 2.5; }
+                
+                .group-box { fill: rgba(236, 239, 241, 0.5); stroke: #90a4ae; stroke-width: 1; stroke-dasharray: 10, 5; rx: 15; ry: 15; }
+                .group-text { font-size: 18px; font-weight: bold; fill: #37474f; text-anchor: middle; }
+                
+                .env-layer { rx: 20; ry: 20; }
+                .env-gcp { fill: #e3f2fd; }
+                .env-firebase { fill: #fff3e0; }
+                .env-browser-frontend { fill: #e8f5e9; }
+                .env-browser-js { fill: #f3e5f5; }
+                .env-text { font-size: 24px; font-weight: bold; fill: #546e7a; text-anchor: middle; }
+            </style>
+
+            <!-- 화살표 마커 정의 -->
+            <defs>
+                <marker id="arrowhead-detailed" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#546e7a"></polygon>
+                </marker>
+            </defs>
+
+            <!-- 환경 배경 레이어 -->
+            <rect x="10" y="850" width="780" height="440" class="env-layer env-gcp"></rect>
+            <text x="400" y="890" class="env-text">Google Cloud</text>
+            
+            <rect x="810" y="850" width="780" height="440" class="env-layer env-firebase"></rect>
+            <text x="1200" y="890" class="env-text">Firebase</text>
+            
+            <rect x="10" y="10" width="780" height="820" class="env-layer env-browser-frontend"></rect>
+            <text x="400" y="50" class="env-text">Browser Frontend (UI/View)</text>
+            
+            <rect x="810" y="10" width="780" height="820" class="env-layer env-browser-js"></rect>
+            <text x="1200" y="50" class="env-text">Browser JS (Client Logic)</text>
+
+            <!-- 1. 사용자 및 컴포넌트 계층 (Browser Frontend) -->
+            <g id="user-interaction-layer">
+                <ellipse cx="150" cy="150" rx="60" ry="30" class="node-rect user-node"></ellipse>
+                <text x="150" y="150" class="node-text">사용자</text>
+                
+                <rect x="350" y="130" width="120" height="40" class="node-rect file-node"></rect>
+                <text x="410" y="150" class="node-text">index.html</text>
+                
+                <rect x="200" y="300" width="400" height="300" class="group-box"></rect>
+                <text x="400" y="325" class="group-text" font-size="16">UI Components (Views)</text>
+                <rect x="250" y="350" width="120" height="40" class="node-rect component-node"></rect>
+                <text x="310" y="370" class="node-text">Board.js</text>
+                <rect x="430" y="350" width="120" height="40" class="node-rect component-node"></rect>
+                <text x="490" y="370" class="node-text">EditorPanel.js</text>
+                <rect x="250" y="420" width="120" height="40" class="node-rect component-node"></rect>
+                <text x="310" y="440" class="node-text">Controls.js</text>
+                <rect x="430" y="420" width="120" height="40" class="node-rect component-node"></rect>
+                <text x="490" y="440" class="node-text">AcutePanel.js</text>
+            </g>
+
+            <!-- 2. 애플리케이션 로직 계층 (Browser JS) -->
+            <g id="app-logic-layer">
+                <rect x="1000" y="130" width="120" height="40" class="node-rect file-node"></rect>
+                <text x="1060" y="150" class="node-text">main.js</text>
+
+                <rect x="1100" y="250" width="200" height="200" class="node-rect store-node"></rect>
+                <text x="1200" y="270" class="node-text">store.js (State Hub)</text>
+                <rect x="1120" y="290" width="160" height="40" fill="#feecb3"></rect>
+                <text x="1200" y="310" class="sub-node-text">State (nodes, user)</text>
+                <rect x="1120" y="340" width="160" height="40" fill="#feecb3"></rect>
+                <text x="1200" y="360" class="sub-node-text">Actions (updateNode, login)</text>
+                <rect x="1120" y="390" width="160" height="40" fill="#feecb3"></rect>
+                <text x="1200" y="410" class="sub-node-text">Getters (getNodeById)</text>
+
+                <rect x="900" y="500" width="300" height="150" class="group-box"></rect>
+                <text x="1050" y="525" class="group-text" font-size="16">Services</text>
+                <rect x="930" y="550" width="120" height="40" class="node-rect service-node"></rect>
+                <text x="990" y="570" class="node-text">apiService.js</text>
+                <rect x="1070" y="550" width="120" height="40" class="node-rect service-node"></rect>
+                <text x="1130" y="570" class="node-text">authService.js</text>
+                
+                <rect x="1350" y="500" width="120" height="40" class="node-rect logic-node"></rect>
+                <text x="1410" y="520" class="node-text">activation.js</text>
+            </g>
+
+            <!-- 3. 백엔드 및 외부 서비스 계층 -->
+            <g id="backend-layer">
+                <!-- Google Cloud -->
+                <rect x="100" y="950" width="600" height="250" class="node-rect server-node"></rect>
+                <text x="400" y="970" class="node-text">server.js (Express)</text>
+                <rect x="120" y="990" width="120" height="40" fill="#ffcdd2"></rect><text x="180" y="1010" class="sub-node-text">Router</text>
+                <rect x="260" y="990" width="120" height="40" fill="#ffcdd2"></rect><text x="320" y="1010" class="sub-node-text">Middleware</text>
+                <rect x="400" y="990" width="120" height="40" fill="#ffcdd2"></rect><text x="460" y="1010" class="sub-node-text">Controllers</text>
+                <rect x="540" y="990" width="120" height="40" fill="#ffcdd2"></rect><text x="600" y="1010" class="sub-node-text">Cron Job</text>
+
+                <!-- Firebase -->
+                <rect x="900" y="950" width="300" height="150" class="group-box"></rect>
+                <text x="1050" y="975" class="group-text" font-size="16">Firestore DB</text>
+                <ellipse cx="980" cy="1030" rx="70" ry="30" class="node-rect db-node"></ellipse>
+                <text x="980" y="1030" class="node-text">nodes</text>
+                <ellipse cx="1120" cy="1030" rx="70" ry="30" class="node-rect db-node"></ellipse>
+                <text x="1120" y="1030" class="node-text">tracks</text>
+                
+                <ellipse cx="1350" cy="1000" rx="80" ry="40" class="node-rect db-node"></ellipse>
+                <text x="1350" y="1000" class="node-text">Firebase Auth</text>
+            </g>
+
+            <!-- 파이프라인 연결 화살표 -->
+            <g id="pipelines-detailed" marker-end="url(#arrowhead-detailed)">
+                <!-- 사용자 상호작용 -> Action 호출 -->
+                <path d="M210,150 H350" class="arrow"></path>
+                <text x="275" y="140" class="path-text">1. Load</text>
+                <path d="M470,150 C 650,150 850,150 1000,150" class="arrow"></path>
+                <text x="725" y="140" class="path-text">2. Script Load</text>
+                <path d="M490,390 C 650,450 1000,400 1120,360" class="arrow"></path>
+                <text x="800" y="410" class="path-text">A. User Event (e.g., click)</text>
+                <text x="800" y="425" class="path-text">B. Dispatch Action</text>
+
+                <!-- State 구독 및 UI 렌더링 -->
+                <path d="M1120,410 C1000,500 650,450 550,370" class="arrow arrow-dashed"></path>
+                <text x="825" y="470" class="path-text">C. Get State (via Getters)</text>
+                <text x="825" y="485" class="path-text">D. Subscribe to State</text>
+                <path d="M1200,290 C1000,200 600,250 490,350" class="arrow arrow-dashed"></path>
+                <text x="825" y="270" class="path-text">E. State Change Notify</text>
+                <text x="825" y="285" class="path-text">F. Re-render Component</text>
+
+                <!-- Action -> Service -> Backend -> DB -->
+                <path d="M1200,380 C1150,450 1050,530 990,550" class="arrow"></path>
+                <text x="1080" y="480" class="path-text">G. Action calls Service</text>
+                <path d="M990,590 C800,700 500,850 460,990" class="arrow arrow-bold"></path>
+                <text x="700" y="780" class="path-text">H. HTTP Request</text>
+                <path d="M400,1030 C340,1030 240,1010 240,1010" class="arrow"></path>
+                <text x="290" y="1040" class="path-text">I. Middleware</text>
+                <path d="M260,1010 H180" class="arrow"></path>
+                <text x="220" y="995" class="path-text">J. Router</text>
+                <path d="M460,1030 C 650,1030 850,1030 940,1030" class="arrow arrow-bold"></path>
+                <text x="700" y="1020" class="path-text">K. DB Query</text>
+                
+                <!-- DB -> Backend -> Service -> Action -> State -->
+                <path d="M940,1030 C 850,1060 650,1060 460,1030" class="arrow arrow-dashed arrow-bold"></path>
+                <text x="700" y="1065" class="path-text">L. DB Response</text>
+                <path d="M460,990 C 500,850 800,700 990,590" class="arrow arrow-dashed"></path>
+                <text x="700" y="810" class="path-text">M. HTTP Response</text>
+                <path d="M990,550 C1050,450 1150,380 1200,380" class="arrow arrow-dashed"></path>
+                <text x="1080" y="450" class="path-text">N. Service returns data</text>
+                <text x="1080" y="465" class="path-text">O. Dispatch Success Action</text>
+                
+                <!-- Cron Job -->
+                <path d="M600,1030 C 750,1100 900,1080 980,1060" class="arrow arrow-dashed"></path>
+                <text x="800" y="1090" class="path-text">Read All Nodes</text>
+                <path d="M980,1060 C 1050,1090 1120,1060 1120,1060" class="arrow arrow-dashed"></path>
+                <text x="1040" y="1080" class="path-text">Write to Tracks</text>
+            </g>
+        </svg>

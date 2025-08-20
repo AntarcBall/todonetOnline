@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoNet - Dark Mode Test</title>
+    <link rel="icon" href="assets/new_icon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/style.css">
+    <style>
+        /* Ensure login is hidden */
+        #login-container {
+            display: none;
+        }
+    </style>
+</head>
+<body class="dark">
+
+    <div id="app">
+        <button id="theme-switcher" title="Toggle Theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <div class="side-panels-container">
+            <div id="starred-nodes-panel">
+                <h3>Starred Nodes</h3>
+                <table id="starred-nodes-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Activation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Important Project</td>
+                            <td>85.30</td>
+                        </tr>
+                        <tr>
+                            <td>Weekly Report</td>
+                            <td>42.10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="acute-panel">
+                <h3>Acute Tasks</h3>
+                <table id="acute-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Today</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Urgent Fix</td>
+                            <td style="text-align: center;">✅</td>
+                        </tr>
+                        <tr>
+                            <td>Client Call</td>
+                            <td style="text-align: center;">❌</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="grid-background"></div>
+        <div id="board">
+            <div id="node-container">
+                <svg id="arrow-svg-layer" style="position: absolute; width: 2000px; height: 2000px; top: 0; left: 0; pointer-events: none;">
+                    <defs>
+                        <linearGradient id="arrow-gradient" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="var(--arrow-gradient-start-color)"></stop>
+                            <stop offset="100%" stop-color="var(--arrow-gradient-end-color)"></stop>
+                        </linearGradient>
+                        <marker id="arrowhead" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" orient="auto-start-reverse" markerWidth="8" markerHeight="8">
+                            <polygon points="0 0, 10 5, 0 10" fill="#facc15"></polygon>
+                        </marker>
+                    </defs>
+                    <!-- Arrow from Important Project to Sub-Task 1 -->
+                    <path d="M 280 240 L 480 180" class="arrow-path" stroke="url(#arrow-gradient)" stroke-width="3" fill="none" marker-end="url(#arrowhead)" style="opacity: 0.7;"></path>
+                     <!-- Arrow from Important Project to Sub-Task 2 -->
+                    <path d="M 280 260 L 480 380" class="arrow-path" stroke="url(#arrow-gradient)" stroke-width="2" fill="none" marker-end="url(#arrowhead)" style="opacity: 0.5;"></path>
+                </svg>
+
+                <div class="node selected" style="left: 200px; top: 200px; --node-end-color: #a7f3d0;">
+                    <div class="star-indicator" style="color: rgb(250, 204, 21);"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+                    <h3>Important Project</h3>
+                    <div class="commit-value">150</div>
+                    <div class="activation-value">85.30</div>
+                </div>
+                <div class="node" style="left: 500px; top: 150px; --node-end-color: #fecaca;">
+                    <h3>Sub-Task 1</h3>
+                    <div class="commit-value">70</div>
+                    <div class="activation-value">30.15</div>
+                </div>
+                <div class="node" style="left: 500px; top: 350px; --node-end-color: #bfdbfe;">
+                    <h3>Sub-Task 2</h3>
+                    <div class="commit-value">80</div>
+                    <div class="activation-value">55.15</div>
+                </div>
+            </div>
+        </div>
+
+        <button id="add-node-btn" class="control-button" title="새 노드 추가">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        </button>
+
+        <button id="calc-activation-btn" class="control-button" title="Activation 계산">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </button>
+
+        <button id="toggle-panels-btn" class="control-button" title="Toggle Panels">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        </button>
+
+        <div id="editor-panel" class="show">
+             <div class="editor-header">
+                 <h2>노드 편집</h2>
+                 <div>
+                    <button id="star-node-btn" class="header-icon-btn starred" title="Star Node">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#facc15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </button>
+                    <button id="acute-node-btn" class="header-icon-btn" title="Mark as Acute">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    </button>
+                    <button id="delete-node-btn" class="header-icon-btn" title="Delete Node">
+                        <svg width="20" height="20" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="20" width="30" height="50" rx="5" fill="none" stroke="currentColor" stroke-width="6"/><rect x="10" y="15" width="40" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="6"/><rect x="25" y="12" width="10" height="3" rx="1" fill="none" stroke="currentColor" stroke-width="6"/></svg>
+                    </button>
+                    <button id="close-panel-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                 </div>
+             </div>
+             <form id="node-editor-form">
+                 <input type="hidden" id="node-id-input" value="test-node-1">
+                 <div class="form-group">
+                     <label for="node-name-input">Name</label>
+                     <input type="text" id="node-name-input" value="Important Project">
+                 </div>
+                 <div class="form-group">
+                     <label for="node-commit-input">Commit</label>
+                     <div class="commit-input-container">
+                        <input type="number" id="node-commit-input" value="150">
+                        <div class="commit-buttons">
+                            <button type="button" id="commit-plus-1">+1</button>
+                            <button type="button" id="commit-plus-5">+5</button>
+                        </div>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label>Links</label>
+                     <div class="links-container">
+                         <table>
+                             <thead>
+                                 <tr>
+                                     <th>End</th>
+                                     <th style="width: 6rem; text-align: center;">Weight</th>
+                                     <th style="width: 2.5rem;"></th>
+                                 </tr>
+                             </thead>
+                             <tbody id="links-table-body">
+                                <tr>
+                                    <td>Sub-Task 1</td>
+                                    <td>
+                                        <div class="link-weight-controls">
+                                            <span class="weight-value">3</span>
+                                            <div class="weight-buttons">
+                                                <button class="link-weight-btn">▲</button>
+                                                <button class="link-weight-btn">▼</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><button class="link-delete-btn">🗑️</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Sub-Task 2</td>
+                                    <td>
+                                        <div class="link-weight-controls">
+                                            <span class="weight-value">2</span>
+                                            <div class="weight-buttons">
+                                                <button class="link-weight-btn">▲</button>
+                                                <button class="link-weight-btn">▼</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><button class="link-delete-btn">🗑️</button></td>
+                                </tr>
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                    <label>Color</label>
+                    <div id="color-palette" class="color-palette-container">
+                        <div class="color-swatch" style="background-color: rgb(31, 41, 55);"></div>
+                        <div class="color-swatch selected" style="background-color: rgb(167, 243, 208);"></div>
+                        <div class="color-swatch" style="background-color: rgb(254, 202, 202);"></div>
+                        <div class="color-swatch" style="background-color: rgb(191, 219, 254);"></div>
+                        <div class="color-swatch" style="background-color: rgb(254, 240, 138);"></div>
+                        <div class="color-swatch" style="background-color: rgb(221, 214, 254);"></div>
+                    </div>
+                 </div>
+                 <button type="submit" class="save-button">저장</button>
+             </form>
+        </div>
+
+        <div id="snackbar"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editorPanel = document.getElementById('editor-panel');
+            const closeButton = document.getElementById('close-panel-btn');
+            const nodes = document.querySelectorAll('.node');
+            const toggleBtn = document.getElementById('toggle-panels-btn');
+            const sidePanelsContainer = document.querySelector('.side-panels-container');
+
+            // --- Editor Panel Logic ---
+            const openPanel = () => {
+                editorPanel.classList.add('show');
+            };
+
+            const closePanel = () => {
+                editorPanel.classList.remove('show');
+            };
+
+            // Wire up the close button
+            if (closeButton) {
+                closeButton.addEventListener('click', closePanel);
+            }
+
+            // Wire up nodes to open the panel
+            nodes.forEach(node => {
+                node.addEventListener('click', openPanel);
+            });
+
+            // --- Side Panels Toggle Logic ---
+            if (toggleBtn && sidePanelsContainer) {
+                toggleBtn.addEventListener('click', () => {
+                    sidePanelsContainer.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
